@@ -1,19 +1,21 @@
-import React from 'react'
-import logo from './logo.svg'
+import React, { useLayoutEffect } from 'react'
 import { PageContextProvider } from './usePageContext'
 import type { PageContext } from './types'
-import './PageShell.css'
+import './PageShell.scss'
 import { Link } from './Link'
 
 export { PageShell }
 
 function PageShell({ children, pageContext }: { children: React.ReactNode; pageContext: PageContext }) {
+
   return (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
         <Layout>
           <Sidebar>
-            <Logo />
+            <div className="logo">N . M</div>
+            <a href="https://www.linkedin.com/in/nzuzo-malinga-70a8a3b2/" className='logo-right-2'><img src="/assets/svgs/linkedin.svg" alt="git" /></a>
+            <a href="https://github.com/nzuzomalinga" className='logo-right'><img src="/assets/svgs/github-mark.svg" alt="git" /></a>
             <Link className="navitem" href="/">
               Home
             </Link>
@@ -33,8 +35,8 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div
       style={{
         display: 'flex',
-        maxWidth: 900,
-        margin: 'auto'
+        flexDirection:'column',
+        margin: '0'
       }}
     >
       {children}
@@ -44,14 +46,17 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 function Sidebar({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <div className='navbar'
       style={{
         padding: 20,
         flexShrink: 0,
+        position:'relative',
         display: 'flex',
-        flexDirection: 'column',
+        justifyContent:"center",
+        flexDirection: 'row',
+        gap:"16px",
         alignItems: 'center',
-        lineHeight: '1.8em'
+        lineHeight: '1.8em',
       }}
     >
       {children}
@@ -61,11 +66,10 @@ function Sidebar({ children }: { children: React.ReactNode }) {
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <div className='main-content'
       style={{
-        padding: 20,
-        paddingBottom: 50,
-        borderLeft: '2px solid #eee',
+        padding: 0,
+        paddingBottom: 0,
         minHeight: '100vh'
       }}
     >
@@ -74,17 +78,4 @@ function Content({ children }: { children: React.ReactNode }) {
   )
 }
 
-function Logo() {
-  return (
-    <div
-      style={{
-        marginTop: 20,
-        marginBottom: 10
-      }}
-    >
-      <a href="/">
-        <img src={logo} height={64} width={64} alt="logo" />
-      </a>
-    </div>
-  )
-}
+
